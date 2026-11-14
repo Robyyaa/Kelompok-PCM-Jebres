@@ -1,0 +1,88 @@
+{% load static %}
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#075c3b">
+  <meta name="description" content="Website informasi Pimpinan Cabang Muhammadiyah Jebres.">
+  <title>{% block title %}PCM Jebres{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <a class="skip-link" href="#konten">Lewati ke konten</a>
+
+  <header class="site-header">
+    <div class="header-inner container">
+      <a class="brand" href="{% url 'pcm:home' %}" aria-label="Beranda PCM Jebres">
+        <span class="brand-mark">
+          <img src="{% static 'img/Muhammadiyah.svg' %}"
+               alt="Logo Muhammadiyah" width="48" height="48">
+        </span>
+        <span class="brand-copy">
+          <strong>{% if profil and profil.nama_singkat %}{{ profil.nama_singkat }}{% else %}PCM Jebres{% endif %}</strong>
+          {% if profil and profil.tagline %}<span>{{ profil.tagline }}</span>{% else %}<span>Pimpinan Cabang Muhammadiyah Jebres</span>{% endif %}
+        </span>
+      </a>
+
+      <nav class="main-nav" aria-label="Navigasi utama">
+        <a class="nav-link{% if active_page == 'home' %} is-current{% endif %}" href="{% url 'pcm:home' %}">Beranda</a>
+        <a class="nav-link{% if active_page == 'profil' %} is-current{% endif %}" href="{% url 'pcm:profil' %}">Profil</a>
+        <a class="nav-link{% if active_page == 'pimpinan' %} is-current{% endif %}" href="{% url 'pcm:pimpinan' %}">Pimpinan</a>
+        <a class="nav-link{% if active_page == 'ranting' %} is-current{% endif %}" href="{% url 'pcm:ranting' %}">Ranting</a>
+        <a class="nav-link{% if active_page == 'amal_usaha' %} is-current{% endif %}" href="{% url 'pcm:amal_usaha' %}">Amal Usaha</a>
+        <a class="nav-link{% if active_page == 'berita' %} is-current{% endif %}" href="{% url 'pcm:berita_list' %}">Berita</a>
+        <a class="nav-link{% if active_page == 'agenda' %} is-current{% endif %}" href="{% url 'pcm:agenda' %}">Agenda</a>
+        <a class="nav-link{% if active_page == 'unduhan' %} is-current{% endif %}" href="{% url 'pcm:unduhan' %}">Unduhan</a>
+        <a class="nav-cta{% if active_page == 'kontak' %} is-current{% endif %}" href="{% url 'pcm:kontak' %}">Kontak <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="konten">
+    {% include "pcm/partials/messages.html" %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer" id="kontak">
+    <div class="container footer-main">
+      <div class="footer-identity">
+        <a class="brand brand-footer" href="{% url 'pcm:home' %}">
+          <span class="brand-mark">
+            <img src="{% static 'img/Muhammadiyah.svg' %}"
+                 alt="" width="42" height="42">
+          </span>
+          <span class="brand-copy">
+            <strong>{% if profil %}{{ profil.nama }}{% else %}Pimpinan Cabang Muhammadiyah Jebres{% endif %}</strong>
+            <span>Informasi organisasi</span>
+          </span>
+        </a>
+        <p class="footer-address">
+          {% if profil and profil.alamat_sekretariat %}{{ profil.alamat_sekretariat }}{% else %}Informasi alamat sekretariat belum tersedia.{% endif %}
+        </p>
+        {% if profil and profil.telepon %}<p class="footer-contact">Telepon: {{ profil.telepon }}</p>{% endif %}
+        {% if profil and profil.email %}<p class="footer-contact"><a href="mailto:{{ profil.email }}">{{ profil.email }}</a></p>{% endif %}
+      </div>
+
+      <div class="footer-links">
+        <h2>Tautan Persyarikatan</h2>
+        {% if tautan_terkait %}
+          <ul>
+            {% for tautan in tautan_terkait %}
+              <li><a href="{{ tautan.url }}" target="_blank" rel="noopener noreferrer">{{ tautan.nama }} <span aria-hidden="true">↗</span></a></li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>Tautan belum tersedia.</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>Website ini dibuat untuk tugas kuliah Pemrograman Web berbasis Framework, bukan website resmi PCM Jebres.</p>
+      <p class="logo-credit">Logo Muhammadiyah: K. H. Siradj Dahlan, vektor oleh Hibensis, via <a href="https://commons.wikimedia.org/wiki/File:Muhammadiyah.svg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a>, lisensi CC BY-SA 4.0.</p>
+      <p class="copyright">© {% now "Y" %} PCM Jebres</p>
+    </div>
+  </footer>
+</body>
+</html>

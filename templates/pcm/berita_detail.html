@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}{{ berita.judul }} | PCM Jebres{% endblock %}
+
+{% block content %}
+<article class="article-page">
+  <header class="article-header">
+    <div class="container article-header-inner">
+      <a class="back-link" href="{% url 'pcm:berita_list' %}">← Semua berita</a>
+      <p class="section-kicker">Berita PCM Jebres</p>
+      <h1>{{ berita.judul }}</h1>
+      <time datetime="{{ berita.tanggal_terbit|date:'c' }}">{{ berita.tanggal_terbit|date:"d/m/Y · H:i" }}</time>
+    </div>
+  </header>
+  {% if berita.gambar_sampul %}
+    <div class="container article-cover"><img src="{{ berita.gambar_sampul.url }}" alt="Gambar sampul: {{ berita.judul }}"></div>
+  {% endif %}
+  <div class="container article-layout">
+    <div class="article-body">
+      {% if berita.ringkasan %}<p class="article-summary">{{ berita.ringkasan }}</p>{% endif %}
+      <div class="article-content">{{ berita.isi|linebreaks }}</div>
+    </div>
+    {% if berita_lain %}
+      <aside class="related-news" aria-labelledby="related-title">
+        <p class="section-kicker">Baca juga</p>
+        <h2 id="related-title">Berita lainnya</h2>
+        <ul>
+          {% for lainnya in berita_lain %}
+            <li><time datetime="{{ lainnya.tanggal_terbit|date:'c' }}">{{ lainnya.tanggal_terbit|date:"d/m/Y" }}</time><a href="{% url 'pcm:berita_detail' lainnya.slug %}">{{ lainnya.judul }}</a></li>
+          {% endfor %}
+        </ul>
+      </aside>
+    {% endif %}
+  </div>
+</article>
+{% endblock %}

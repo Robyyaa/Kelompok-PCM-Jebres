@@ -1,0 +1,26 @@
+[project]
+name = "pcm-django"
+version = "0.1.0"
+description = "Django website for PCM Jebres"
+readme = "README.md"
+authors = [
+    { name = "Bintang Abidzar", email = "bintangabidzarff1@gmail.com" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "dj-database-url>=2.3",
+    "django>=6.1.3",
+    "django-storages[s3]>=1.14",
+    "gunicorn>=23.0",
+    "pillow>=13.0.0",
+    "psycopg[binary]>=3.2",
+    "python-dotenv>=1.0",
+    "whitenoise>=6.9",
+]
+
+[project.scripts]
+pcm-django = "pcm_django:main"
+
+[build-system]
+requires = ["uv_build>=0.13.3,<0.14.0"]
+build-backend = "uv_build"

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Agenda | PCM Jebres{% endblock %}
+
+{% block content %}
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="container page-hero-inner">
+    <p class="eyebrow"><span class="eyebrow-dot"></span> Kegiatan organisasi</p>
+    <h1 id="page-title">Agenda</h1>
+    <p>Jadwal kegiatan yang tercatat dalam database.</p>
+  </div>
+  <div class="hero-bottom-line" aria-hidden="true"></div>
+</section>
+
+<div class="container agenda-page-layout">
+  <section class="agenda-page-group" aria-labelledby="upcoming-title">
+    <div class="agenda-page-heading"><p class="section-kicker">Selanjutnya</p><h2 id="upcoming-title">Akan datang</h2></div>
+    {% if agenda_mendatang_list %}
+      <div class="agenda-page-list">
+        {% for agenda in agenda_mendatang_list %}
+          <article class="agenda-page-card">
+            <time class="agenda-page-date" datetime="{{ agenda.waktu_mulai|date:'c' }}"><strong>{{ agenda.waktu_mulai|date:"d" }}</strong><span>{{ agenda.waktu_mulai|date:"m/Y" }}</span></time>
+            <div><h3>{{ agenda.nama_kegiatan }}</h3><p class="agenda-meta">{{ agenda.waktu_mulai|date:"H:i" }}{% if agenda.tempat %} <span aria-hidden="true">·</span> {{ agenda.tempat }}{% endif %}</p>{% if agenda.keterangan %}<p class="agenda-description">{{ agenda.keterangan|linebreaksbr }}</p>{% endif %}</div>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}<div class="empty-state"><span class="empty-mark" aria-hidden="true">✳</span><p>Belum ada agenda mendatang.</p></div>{% endif %}
+  </section>
+
+  <section class="agenda-page-group past-agenda" aria-labelledby="past-title">
+    <div class="agenda-page-heading"><p class="section-kicker">Arsip kegiatan</p><h2 id="past-title">Sudah terlaksana</h2></div>
+    {% if agenda_terlaksana_list %}
+      <div class="agenda-page-list">
+        {% for agenda in agenda_terlaksana_list %}
+          <article class="agenda-page-card">
+            <time class="agenda-page-date" datetime="{{ agenda.waktu_mulai|date:'c' }}"><strong>{{ agenda.waktu_mulai|date:"d" }}</strong><span>{{ agenda.waktu_mulai|date:"m/Y" }}</span></time>
+            <div><h3>{{ agenda.nama_kegiatan }}</h3><p class="agenda-meta">{{ agenda.waktu_mulai|date:"H:i" }}{% if agenda.tempat %} <span aria-hidden="true">·</span> {{ agenda.tempat }}{% endif %}</p>{% if agenda.keterangan %}<p class="agenda-description">{{ agenda.keterangan|linebreaksbr }}</p>{% endif %}</div>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}<div class="empty-state"><span class="empty-mark" aria-hidden="true">✳</span><p>Belum ada agenda yang terlaksana.</p></div>{% endif %}
+  </section>
+</div>
+{% endblock %}

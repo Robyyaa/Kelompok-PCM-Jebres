@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Ranting | PCM Jebres{% endblock %}
+
+{% block content %}
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="container page-hero-inner">
+    <p class="eyebrow"><span class="eyebrow-dot"></span> Jaringan organisasi</p>
+    <h1 id="page-title">Daftar Ranting</h1>
+    <p>Nama ranting yang tercatat dalam database organisasi.</p>
+  </div>
+  <div class="hero-bottom-line" aria-hidden="true"></div>
+</section>
+
+<section class="container listing-section" aria-label="Daftar ranting PCM Jebres">
+  {% if ranting_list %}
+    <div class="table-scroll">
+      <table class="data-table">
+        <thead><tr><th scope="col">No.</th><th scope="col">Nama Ranting</th><th scope="col">Ketua</th><th scope="col">Alamat</th><th scope="col">Kontak Resmi</th></tr></thead>
+        <tbody>
+          {% for ranting in ranting_list %}
+            <tr>
+              <td class="table-number">{{ forloop.counter|stringformat:"02d" }}</td>
+              <th scope="row">{{ ranting.nama }}</th>
+              <td>{% if ranting.ketua %}{{ ranting.ketua }}{% else %}<span class="muted-value">Belum tersedia</span>{% endif %}</td>
+              <td>{% if ranting.alamat %}{{ ranting.alamat|linebreaksbr }}{% else %}<span class="muted-value">Belum tersedia</span>{% endif %}</td>
+              <td>{% if ranting.telepon %}{{ ranting.telepon }}{% else %}<span class="muted-value">Belum tersedia</span>{% endif %}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <div class="empty-state listing-empty"><span class="empty-mark" aria-hidden="true">✳</span><p>Data ranting belum tersedia.</p></div>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,40 @@
+
+# Python-generated files
+__pycache__/
+*.py[cod]
+build/
+dist/
+wheels/
+*.egg-info/
+
+# Virtual environments
+.venv/
+venv/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+
+# Local database
+db.sqlite3
+db.sqlite3-*
+
+# Uploaded and collected files
+media/
+staticfiles/
+
+# Test and tooling artifacts
+.coverage
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# IDE and editor
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db

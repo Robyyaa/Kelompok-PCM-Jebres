@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}{% if profil and profil.nama_singkat %}{{ profil.nama_singkat }}{% else %}PCM Jebres{% endif %} | Profil Organisasi{% endblock %}
+
+{% block content %}
+<section class="profile-hero" aria-labelledby="profile-title">
+  <div class="container profile-hero-inner">
+    <p class="eyebrow"><span class="eyebrow-dot"></span> Mengenal organisasi</p>
+    <h1 id="profile-title">
+      {% if profil and profil.nama %}{{ profil.nama }}{% else %}Profil organisasi belum tersedia.{% endif %}
+    </h1>
+    <p class="profile-address">
+      <span class="address-icon" aria-hidden="true">⌖</span>
+      {% if profil and profil.alamat_sekretariat %}{{ profil.alamat_sekretariat }}{% else %}Alamat sekretariat belum tersedia.{% endif %}
+    </p>
+  </div>
+  <div class="hero-bottom-line" aria-hidden="true"></div>
+</section>
+
+<div class="container profile-layout">
+  <aside class="profile-aside" aria-label="Navigasi profil">
+    <span class="aside-kicker">Di halaman ini</span>
+    <a href="#tentang">Tentang organisasi</a>
+    <a href="#sejarah">Sejarah</a>
+    <a href="#visi">Visi</a>
+    <a href="#misi">Misi</a>
+    <div class="aside-note">
+      <span class="aside-note-mark" aria-hidden="true">✳</span>
+      <p>Informasi profil bersumber dari data organisasi yang tersimpan.</p>
+    </div>
+  </aside>
+
+  <div class="profile-content">
+    <section class="profile-block profile-about" id="tentang" aria-labelledby="about-title">
+      <p class="section-kicker">01 · Sekilas</p>
+      <h2 id="about-title">Tentang organisasi</h2>
+      {% if profil and profil.tentang %}
+        <p class="profile-prose">{{ profil.tentang|linebreaksbr }}</p>
+      {% else %}
+        <p class="profile-empty">Informasi tentang organisasi belum tersedia.</p>
+      {% endif %}
+    </section>
+
+    <section class="profile-block profile-history" id="sejarah" aria-labelledby="history-title">
+      <div class="block-heading-row">
+        <div>
+          <p class="section-kicker">02 · Perjalanan</p>
+          <h2 id="history-title">Sejarah</h2>
+        </div>
+        <span class="history-seal" aria-hidden="true">✳</span>
+      </div>
+      {% if profil and profil.sejarah %}
+        <p class="profile-prose">{{ profil.sejarah|linebreaksbr }}</p>
+      {% else %}
+        <p class="profile-empty">Informasi sejarah belum tersedia.</p>
+      {% endif %}
+    </section>
+
+    <section class="profile-block profile-values" id="visi" aria-labelledby="vision-title">
+      <p class="section-kicker">03 · Arah organisasi</p>
+      <h2 id="vision-title">Visi</h2>
+      {% if profil and profil.visi %}
+        <blockquote class="vision-quote">{{ profil.visi|linebreaksbr }}</blockquote>
+      {% else %}
+        <p class="profile-empty">Visi belum tersedia.</p>
+      {% endif %}
+    </section>
+
+    <section class="profile-block profile-values mission-block" id="misi" aria-labelledby="mission-title">
+      <p class="section-kicker">04 · Langkah bersama</p>
+      <h2 id="mission-title">Misi</h2>
+      {% if misi_list %}
+        <ol class="mission-list">
+          {% for misi in misi_list %}
+            <li><span class="mission-number">{{ forloop.counter|stringformat:"02d" }}</span><span>{{ misi }}</span></li>
+          {% endfor %}
+        </ol>
+      {% else %}
+        <p class="profile-empty">Misi belum tersedia.</p>
+      {% endif %}
+    </section>
+  </div>
+</div>
+{% endblock %}

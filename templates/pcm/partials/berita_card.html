@@ -1,0 +1,15 @@
+<article class="news-card">
+  {% if berita.gambar_sampul %}
+    <div class="news-image-wrap">
+      <img src="{{ berita.gambar_sampul.url }}" alt="Gambar sampul: {{ berita.judul }}" class="news-image">
+    </div>
+  {% else %}
+    <div class="news-image-placeholder" aria-hidden="true"><span>PCM<br>JEBRES</span></div>
+  {% endif %}
+  <div class="news-card-body">
+    <time class="card-date" datetime="{{ berita.tanggal_terbit|date:'c' }}">{{ berita.tanggal_terbit|date:"d/m/Y" }}</time>
+    <h3><a href="{% url 'pcm:berita_detail' berita.slug %}">{{ berita.judul }}</a></h3>
+    {% if berita.ringkasan %}<p>{{ berita.ringkasan|truncatewords:24 }}</p>{% endif %}
+    <a class="card-read-more" href="{% url 'pcm:berita_detail' berita.slug %}">Baca berita <span aria-hidden="true">↗</span></a>
+  </div>
+</article>

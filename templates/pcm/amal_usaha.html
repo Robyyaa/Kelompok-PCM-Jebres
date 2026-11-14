@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Amal Usaha | PCM Jebres{% endblock %}
+
+{% block content %}
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="container page-hero-inner">
+    <p class="eyebrow"><span class="eyebrow-dot"></span> Kontribusi organisasi</p>
+    <h1 id="page-title">Amal Usaha</h1>
+    <p>Amal usaha dikelompokkan berdasarkan bidang yang tercatat.</p>
+  </div>
+  <div class="hero-bottom-line" aria-hidden="true"></div>
+</section>
+
+<section class="container listing-section sector-list" aria-label="Daftar amal usaha">
+  {% if kelompok_amal_usaha %}
+    {% for kelompok in kelompok_amal_usaha %}
+      <section class="sector-group" aria-labelledby="sector-{{ kelompok.kode }}">
+        <div class="sector-heading">
+          <span class="sector-dot" aria-hidden="true"></span>
+          <h2 id="sector-{{ kelompok.kode }}">{{ kelompok.label }}</h2>
+          <span class="sector-count">{{ kelompok.items|length }} item</span>
+        </div>
+        <div class="enterprise-grid">
+          {% for amal in kelompok.items %}
+            <article class="enterprise-card">
+              {% if amal.gambar %}
+                <div class="enterprise-image"><img src="{{ amal.gambar.url }}" alt="Foto {{ amal.nama }}"></div>
+              {% else %}
+                <div class="enterprise-image enterprise-image-empty" aria-hidden="true"><span>{{ kelompok.label }}</span></div>
+              {% endif %}
+              <div class="enterprise-copy">
+                <p class="section-kicker">{{ kelompok.label }}</p>
+                <h3>{{ amal.nama }}</h3>
+                {% if amal.deskripsi %}<p>{{ amal.deskripsi }}</p>{% else %}<p class="muted-value">Deskripsi belum tersedia.</p>{% endif %}
+                {% if amal.alamat %}<p class="enterprise-address">{{ amal.alamat|linebreaksbr }}</p>{% endif %}
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      </section>
+    {% endfor %}
+  {% else %}
+    <div class="empty-state listing-empty"><span class="empty-mark" aria-hidden="true">✳</span><p>Data amal usaha belum tersedia.</p></div>
+  {% endif %}
+</section>
+{% endblock %}

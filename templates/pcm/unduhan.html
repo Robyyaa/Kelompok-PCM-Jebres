@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Unduhan | PCM Jebres{% endblock %}
+
+{% block content %}
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="container page-hero-inner">
+    <p class="eyebrow"><span class="eyebrow-dot"></span> Pusat dokumen</p>
+    <h1 id="page-title">Unduhan</h1>
+    <p>Dokumen yang tersedia untuk diunduh.</p>
+  </div>
+  <div class="hero-bottom-line" aria-hidden="true"></div>
+</section>
+
+<section class="container listing-section" aria-label="Daftar dokumen">
+  {% if dokumen_list %}
+    <div class="document-list">
+      {% for dokumen in dokumen_list %}
+        <article class="document-card">
+          <span class="document-icon" aria-hidden="true">FILE</span>
+          <div class="document-copy"><h2>{{ dokumen.judul }}</h2>{% if dokumen.keterangan %}<p>{{ dokumen.keterangan }}</p>{% else %}<p class="muted-value">Keterangan belum tersedia.</p>{% endif %}<time datetime="{{ dokumen.waktu_unggah|date:'c' }}">Diunggah {{ dokumen.waktu_unggah|date:"d/m/Y" }}</time></div>
+          {% if dokumen.berkas %}<a class="button button-primary document-download" href="{% url 'pcm:unduh_dokumen' dokumen.pk %}">Unduh <span aria-hidden="true">↓</span></a>{% else %}<span class="muted-value">Berkas belum tersedia</span>{% endif %}
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="empty-state listing-empty"><span class="empty-mark" aria-hidden="true">✳</span><p>Belum ada dokumen untuk diunduh.</p></div>
+  {% endif %}
+</section>
+{% endblock %}

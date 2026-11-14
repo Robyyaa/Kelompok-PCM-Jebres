@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Pimpinan | PCM Jebres{% endblock %}
+
+{% block content %}
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="container page-hero-inner">
+    <p class="eyebrow"><span class="eyebrow-dot"></span> Struktur organisasi</p>
+    <h1 id="page-title">Pimpinan</h1>
+    <p>Susunan pimpinan yang tercatat dalam database organisasi.</p>
+  </div>
+  <div class="hero-bottom-line" aria-hidden="true"></div>
+</section>
+
+<section class="container listing-section" aria-label="Daftar pimpinan">
+  {% if pimpinan_list %}
+    <div class="people-grid">
+      {% for orang in pimpinan_list %}
+        <article class="person-card">
+          <div class="person-portrait">
+            {% if orang.foto %}
+              <img src="{{ orang.foto.url }}" alt="Foto {{ orang.nama }}">
+            {% else %}
+              <div class="portrait-empty"><span>Foto<br>belum tersedia</span></div>
+            {% endif %}
+          </div>
+          <div class="person-info">
+            <p class="person-role">{{ orang.jabatan }}</p>
+            <h2>{{ orang.nama }}</h2>
+            {% if orang.periode %}<p class="person-period">Periode {{ orang.periode }}</p>{% endif %}
+          </div>
+          <span class="person-index">{{ forloop.counter|stringformat:"02d" }}</span>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="empty-state listing-empty"><span class="empty-mark" aria-hidden="true">✳</span><p>Data pimpinan belum tersedia.</p></div>
+  {% endif %}
+</section>
+{% endblock %}

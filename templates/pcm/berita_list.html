@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Berita | PCM Jebres{% endblock %}
+
+{% block content %}
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="container page-hero-inner page-hero-split">
+    <div>
+      <p class="eyebrow"><span class="eyebrow-dot"></span> Informasi organisasi</p>
+      <h1 id="page-title">Berita</h1>
+      <p>Kabar dan informasi yang telah diterbitkan.</p>
+    </div>
+    <form class="search-form" method="get" action="{% url 'pcm:berita_list' %}" role="search">
+      <label class="visually-hidden" for="news-search">Cari berita</label>
+      <input id="news-search" type="search" name="q" value="{{ pencarian }}" placeholder="Cari berita...">
+      <button type="submit" aria-label="Cari">⌕</button>
+    </form>
+  </div>
+  <div class="hero-bottom-line" aria-hidden="true"></div>
+</section>
+
+<section class="container listing-section" aria-label="Daftar berita">
+  {% if halaman.object_list %}
+    <div class="news-grid">
+      {% for berita in halaman.object_list %}
+        {% include "pcm/partials/berita_card.html" with berita=berita %}
+      {% endfor %}
+    </div>
+    {% if halaman.paginator.num_pages > 1 %}
+      <nav class="pagination" aria-label="Navigasi halaman berita">
+        {% if halaman.has_previous %}
+          <a class="page-arrow" href="{% url 'pcm:berita_list' %}?page={{ halaman.previous_page_number }}{% if pencarian %}&amp;q={{ pencarian|urlencode }}{% endif %}" aria-label="Halaman sebelumnya">←</a>
+        {% else %}<span class="page-arrow is-disabled" aria-hidden="true">←</span>{% endif %}
+        {% for nomor in halaman.paginator.page_range %}
+          {% if halaman.number == nomor %}
+            <span class="page-number is-current" aria-current="page">{{ nomor }}</span>
+          {% else %}
+            <a class="page-number" href="{% url 'pcm:berita_list' %}?page={{ nomor }}{% if pencarian %}&amp;q={{ pencarian|urlencode }}{% endif %}">{{ nomor }}</a>
+          {% endif %}
+        {% endfor %}
+        {% if halaman.has_next %}
+          <a class="page-arrow" href="{% url 'pcm:berita_list' %}?page={{ halaman.next_page_number }}{% if pencarian %}&amp;q={{ pencarian|urlencode }}{% endif %}" aria-label="Halaman berikutnya">→</a>
+        {% else %}<span class="page-arrow is-disabled" aria-hidden="true">→</span>{% endif %}
+      </nav>
+    {% endif %}
+  {% else %}
+    <div class="empty-state listing-empty">
+      <span class="empty-mark" aria-hidden="true">✳</span>
+      <p>{% if pencarian %}Tidak ada berita terbit yang cocok dengan pencarian tersebut.{% else %}Belum ada berita terbit.{% endif %}</p>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

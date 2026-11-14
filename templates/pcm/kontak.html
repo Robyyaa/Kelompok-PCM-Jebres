@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Kontak | PCM Jebres{% endblock %}
+
+{% block content %}
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="container page-hero-inner">
+    <p class="eyebrow"><span class="eyebrow-dot"></span> Sampaikan pesan</p>
+    <h1 id="page-title">Kontak</h1>
+    <p>Gunakan formulir ini untuk mengirim pesan kepada PCM Jebres.</p>
+  </div>
+  <div class="hero-bottom-line" aria-hidden="true"></div>
+</section>
+
+<section class="container contact-layout">
+  <div class="contact-information">
+    <p class="section-kicker">Sekretariat</p>
+    <h2>Informasi<br><span>kontak resmi.</span></h2>
+    <div class="contact-card">
+      <span class="contact-card-label">Alamat</span>
+      <p>{% if profil and profil.alamat_sekretariat %}{{ profil.alamat_sekretariat|linebreaksbr }}{% else %}Informasi alamat sekretariat belum tersedia.{% endif %}</p>
+    </div>
+    {% if profil and profil.telepon %}<div class="contact-card"><span class="contact-card-label">Telepon</span><p><a href="tel:{{ profil.telepon }}">{{ profil.telepon }}</a></p></div>{% else %}<div class="contact-card"><span class="contact-card-label">Telepon</span><p>Informasi telepon resmi belum tersedia.</p></div>{% endif %}
+    {% if profil and profil.email %}<div class="contact-card"><span class="contact-card-label">Email</span><p><a href="mailto:{{ profil.email }}">{{ profil.email }}</a></p></div>{% else %}<div class="contact-card"><span class="contact-card-label">Email</span><p>Informasi email resmi belum tersedia.</p></div>{% endif %}
+    <p class="privacy-note">Pesan yang dikirim tersimpan di database dan hanya dapat dilihat oleh pengelola melalui admin.</p>
+  </div>
+
+  <div class="contact-form-panel">
+    <div class="form-panel-heading"><p class="section-kicker">Formulir pesan</p><h2>Kirim pesan</h2><p>Isi setiap kolom agar pesan dapat kami terima.</p></div>
+    <form method="post" class="contact-form" novalidate>
+      {% csrf_token %}
+      {% if form.non_field_errors %}<div class="form-errors" role="alert">{{ form.non_field_errors }}</div>{% endif %}
+      {% for field in form %}
+        <div class="form-field{% if field.errors %} has-error{% endif %}">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+          {% if field.errors %}<div class="field-errors" role="alert">{{ field.errors }}</div>{% endif %}
+        </div>
+      {% endfor %}
+      <button class="button button-primary form-submit" type="submit">Kirim pesan <span aria-hidden="true">↗</span></button>
+    </form>
+  </div>
+</section>
+{% endblock %}

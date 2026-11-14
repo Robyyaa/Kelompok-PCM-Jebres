@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}{% if profil %}{{ profil.nama_singkat }}{% else %}PCM Jebres{% endif %} | Beranda{% endblock %}
+
+{% block content %}
+<section class="hero-section" aria-labelledby="hero-title">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="eyebrow-dot"></span> Pimpinan Cabang Muhammadiyah · Jebres</p>
+      <h1 id="hero-title">{% if profil %}{{ profil.nama }}{% else %}Pimpinan Cabang Muhammadiyah Jebres{% endif %}</h1>
+      <p class="hero-description">
+        {% if profil and profil.tentang %}{{ profil.tentang }}{% else %}Informasi profil organisasi belum tersedia.{% endif %}
+      </p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="#profil">Kenali organisasi <span aria-hidden="true">↓</span></a>
+        <a class="text-link" href="#visi-misi">Lihat visi dan misi <span aria-hidden="true">↗</span></a>
+      </div>
+      {% if profil and profil.tagline %}<p class="hero-tagline">{{ profil.tagline }}</p>{% endif %}
+    </div>
+
+    <div class="hero-art" aria-label="Identitas Muhammadiyah Jebres">
+      <div class="art-orbit orbit-one"></div>
+      <div class="art-orbit orbit-two"></div>
+      <div class="art-card">
+        {% if profil and profil.gambar_utama %}
+          <img class="hero-image" src="{{ profil.gambar_utama.url }}" alt="Gambar utama {{ profil.nama }}">
+        {% else %}
+          <img class="hero-logo" src="{% static 'img/Muhammadiyah.svg' %}" alt="Logo Muhammadiyah">
+          <span class="art-caption">Identitas organisasi</span>
+        {% endif %}
+      </div>
+      <span class="art-spark spark-one" aria-hidden="true">✳</span>
+      <span class="art-spark spark-two" aria-hidden="true">✳</span>
+    </div>
+  </div>
+  <div class="hero-bottom-line" aria-hidden="true"></div>
+</section>
+
+<section class="intro-section section-pad" id="profil" aria-labelledby="intro-title">
+  <div class="container intro-grid">
+    <div>
+      <p class="section-kicker">Tentang PCM Jebres</p>
+      <h2 id="intro-title">Mengenal<br><span>PCM Jebres.</span></h2>
+    </div>
+    <div class="intro-body">
+      <p>{% if profil and profil.tentang %}{{ profil.tentang }}{% else %}Informasi tentang organisasi belum tersedia.{% endif %}</p>
+      {% if profil and profil.sejarah %}
+        <div class="history-note">
+          <span class="history-icon" aria-hidden="true">↗</span>
+          <div><span class="note-label">Sejarah singkat</span><p>{{ profil.sejarah }}</p></div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="values-section section-pad" id="visi-misi" aria-labelledby="values-title">
+  <div class="container">
+    <div class="section-heading">
+      <div>
+        <p class="section-kicker">Arah gerak organisasi</p>
+        <h2 id="values-title">Visi dan misi<br><span>PCM Jebres.</span></h2>
+      </div>
+      <p class="section-aside">Visi dan misi yang tercatat dalam profil organisasi.</p>
+    </div>
+    <div class="values-grid">
+      <article class="value-card vision-card">
+        <span class="value-index">01 <span class="index-line"></span> VISI</span>
+        <h3>Visi</h3>
+        <p>{% if profil and profil.visi %}{{ profil.visi }}{% else %}Visi belum tersedia.{% endif %}</p>
+      </article>
+      <article class="value-card mission-card">
+        <span class="value-index">02 <span class="index-line"></span> MISI</span>
+        <h3>Misi</h3>
+        {% if misi_list %}
+          <ol>
+            {% for misi in misi_list %}<li>{{ misi }}</li>{% endfor %}
+          </ol>
+        {% else %}
+          <p>Misi belum tersedia.</p>
+        {% endif %}
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="stats-section" id="ringkasan" aria-label="Ringkasan organisasi">
+  <div class="container stats-wrap">
+    <div class="stats-heading">
+      <p class="section-kicker">Sekilas organisasi</p>
+      <h2>Bertumbuh<br>bersama.</h2>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number">{{ jumlah_ranting }}</span>
+      <span class="stat-label">Ranting</span>
+      <span class="stat-detail">tercatat dalam database</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number">{{ jumlah_amal_usaha }}</span>
+      <span class="stat-label">Amal usaha</span>
+      <span class="stat-detail">tercatat dalam database</span>
+    </div>
+    <div class="stat-card stat-card-last">
+      <span class="stat-number stat-number-text">{{ jumlah_anggota_ber_ktam }}</span>
+      <span class="stat-label">Anggota ber-KTAM</span>
+      <span class="stat-detail">sesuai profil organisasi</span>
+    </div>
+  </div>
+</section>
+
+<section class="updates-section section-pad" id="berita" aria-labelledby="news-title">
+  <div class="container">
+    <div class="section-heading updates-heading">
+      <div>
+        <p class="section-kicker">Kabar organisasi</p>
+        <h2 id="news-title">Berita terbaru<span class="heading-period">.</span></h2>
+      </div>
+      <span class="quiet-label">Informasi yang telah dipublikasikan</span>
+    </div>
+    {% if berita_terbaru %}
+      <div class="news-grid">
+        {% for berita in berita_terbaru %}
+          {% include "pcm/partials/berita_card.html" with berita=berita %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="empty-state"><span class="empty-mark" aria-hidden="true">✳</span><p>Belum ada berita terbit.</p></div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="agenda-section section-pad" id="agenda" aria-labelledby="agenda-title">
+  <div class="container agenda-layout">
+    <div class="agenda-intro">
+      <p class="section-kicker">Catat waktunya</p>
+      <h2 id="agenda-title">Agenda<br><span>mendatang.</span></h2>
+      <p>Kegiatan yang waktunya telah tercatat dalam database organisasi.</p>
+    </div>
+    <div class="agenda-list">
+      {% if agenda_mendatang %}
+        {% for agenda in agenda_mendatang %}
+          <article class="agenda-item">
+            <time class="agenda-date" datetime="{{ agenda.waktu_mulai|date:'c' }}">
+              <span>{{ agenda.waktu_mulai|date:"d" }}</span>
+              <small>{{ agenda.waktu_mulai|date:"m/Y" }}</small>
+            </time>
+            <div class="agenda-detail">
+              <h3>{{ agenda.nama_kegiatan }}</h3>
+              <p>{{ agenda.waktu_mulai|date:"H:i" }}{% if agenda.tempat %} <span aria-hidden="true">·</span> {{ agenda.tempat }}{% endif %}</p>
+              {% if agenda.keterangan %}<p class="agenda-note">{{ agenda.keterangan|truncatewords:20 }}</p>{% endif %}
+            </div>
+            <span class="agenda-arrow" aria-hidden="true">↗</span>
+          </article>
+        {% endfor %}
+      {% else %}
+        <div class="empty-state empty-state-light"><span class="empty-mark" aria-hidden="true">✳</span><p>Belum ada agenda mendatang.</p></div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}
