@@ -17,7 +17,7 @@ Website resmi Pimpinan Cabang Muhammadiyah (PCM) Jebres  yang dikembangkan mengg
 
 PCM Jebres merupakan salah satu Pimpinan Cabang Muhammadiyah di Kota Surakarta. Website ini dibuat sebagai media informasi digital untuk memudahkan masyarakat dalam memperoleh informasi mengenai profil organisasi, struktur pimpinan, ranting, serta amal usaha Muhammadiyah di wilayah Jebres.
 
-##Sumber dan Cakupan Data
+## Sumber dan Cakupan Data
 
 |Data|Sumber|Tanggal dicatat|
 |--|--|--|
