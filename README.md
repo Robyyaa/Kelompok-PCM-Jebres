@@ -1,7 +1,7 @@
 # Website PCM Jebres
 Website resmi Pimpinan Cabang Muhammadiyah (PCM) Jebres  yang dikembangkan menggunakan Django. Website ini menyediakan informasi organisasi, pimpinan, ranting, amal usaha, berita, agenda, dokumen, dan layanan pesan masyarakat. Projek ini dibuat untuk memenuhi tugas mata kuliah Pemrograman Web berbasis Framework (TIF1336).
 
->Disclaimer: Website ini merupakan proyek akademik mahasiswa untuk memenuhi tugas mata kuliah Pemrograman Web berbasis Framework. Website bukan merupakan website resmi PCM Jebres.
+>Disclaimer: Website ini merupakan projek akademik mahasiswa untuk memenuhi tugas mata kuliah Pemrograman Web berbasis Framework. Website bukan merupakan website resmi PCM Jebres.
 
 ## Anggota Kelompok
 
@@ -164,4 +164,4 @@ Alamat: Komplek Islamic Center Muhammadiyah Jebres, Jl. Tentara Pelajar No. 1, K
 
 ---
 
-**Dikembangkan sebagai proyek tugas kelompok Teknik Informatika.**
+**Dikembangkan sebagai projek tugas kelompok Teknik Informatika.**
