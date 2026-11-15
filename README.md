@@ -1,20 +1,39 @@
 # Website PCM Jebres
+Website resmi Pimpinan Cabang Muhammadiyah (PCM) Jebres  yang dikembangkan menggunakan Django. Website ini menyediakan informasi organisasi, pimpinan, ranting, amal usaha, berita, agenda, dokumen, dan layanan pesan masyarakat. Projek ini dibuat untuk memenuhi tugas mata kuliah Pemrograman Web berbasis Framework (TIF1336).
 
-Website resmi Pimpinan Cabang Muhammadiyah (PCM) Jebres yang dikembangkan menggunakan Django. Website ini menyediakan informasi organisasi, pimpinan, ranting, amal usaha, berita, agenda, dokumen, dan layanan pesan masyarakat.
+>Disclaimer: Website ini merupakan proyek akademik mahasiswa untuk memenuhi tugas mata kuliah Pemrograman Web berbasis Framework. Website bukan merupakan website resmi PCM Jebres.
 
 ## Anggota Kelompok
 
 | No. | Nama | NIM |
 |---|---|---|
-| 1 | Robby Arroyan Nur Hakim | L200240012 |
-| 2 | Bintang Abidzar Alghifari | L200240059 |
-| 3 | Rayhan Faza Darmawan | L200230032 |
-| 4 | Holizah Hanufi | L200240020 |
-| 5 | Afif Fajri Fauzi Fahma | L200240068 |
+| 1. | Rayhan Faza Darmawan | L200230032 |
+| 2. | Robby Arroyan Nur Hakim | L200240012 |
+| 3. | Holizah Hanufi | L200240020 |
+| 4. | Bintang Abidzar Alghifari | L200240059 |
+| 5. | Afif Fajri Fauzi Fahma | L200240068 |
 
-## Tentang Proyek
+## Tentang Projek
 
 PCM Jebres merupakan salah satu Pimpinan Cabang Muhammadiyah di Kota Surakarta. Website ini dibuat sebagai media informasi digital untuk memudahkan masyarakat dalam memperoleh informasi mengenai profil organisasi, struktur pimpinan, ranting, serta amal usaha Muhammadiyah di wilayah Jebres.
+
+##Sumber dan Cakupan Data
+
+|Data|Sumber|Tanggal dicatat|
+|--|--|--|
+| Konfirmasi keberadaan PCM Jebres dan tautan PDM Kota Surakarta | [Muhammadiyah Jateng - PDM Kota Surakarta](https://muhammadiyahjateng.or.id/pimpinan-daerah-muhammadiyah-kota-surakarta/) | 27 Oktober 2026 |
+| Website PDM Kota Surakarta | [muhammadiyahsolo.com](https://muhammadiyahsolo.com/) | 27 Oktober 2026 |
+| Website PWM Jawa Tengah | [pwmjateng.com](https://pwmjateng.com/) | 27 Oktober 2026 |
+| Website PP Muhammadiyah | [muhammadiyah.or.id](https://muhammadiyah.or.id/) | 27 Oktober 2026 |
+| Logo Muhammadiyah | [Wikimedia Commons - Muhammadiyah.svg](https://commons.wikimedia.org/wiki/File:Muhammadiyah.svg), CC BY-SA 4.0 | 27 Oktober 2026 |
+|Profil dan Alamat PCM Jebres|Google Form Pendataan PCM Jebres, diisi oleh Bapak Drs. Joko Hariyanto (Sekretaris PCM Jebres)|2 November 2026|
+|Sejarah PCM Jebres|Google Form Pendataan PCM Jebres, diisi oleh Bapak Drs. Joko Hariyanto (Sekretaris PCM Jebres)|2 November 2026|
+|Visi dan misi PCM Jebres|Google Form Pendataan PCM Jebres, diisi oleh Bapak Drs. Joko Hariyanto (Sekretaris PCM Jebres)|2 November 2026|
+|Susunan pimpinan PCM Jebres|Google Form Pendataan PCM Jebres, diisi oleh Bapak Drs. Joko Hariyanto (Sekretaris PCM Jebres)|2 November 2026|
+|Daftar ranting|Google Form Pendataan PCM Jebres, diisi oleh Bapak Drs. Joko Hariyanto (Sekretaris PCM Jebres)|2 November 2026|
+|Amal usaha|Google Form Pendataan PCM Jebres, diisi oleh Bapak Drs. Joko Hariyanto (Sekretaris PCM Jebres)|2 November 2026|
+|Berita dan agenda kegiatan|Google Form Pendataan PCM Jebres, diisi oleh Bapak Drs. Joko Hariyanto (Sekretaris PCM Jebres)|2 November 2026|
+| Foto lima kegiatan pada beranda | Lima file foto yang dilampirkan bersama permintaan projek; nama berkas memuat "Joko Haryanto" melalui Google Form Pendataan PCM Jebres, diisi oleh Bapak Drs. Joko Hariyanto (Sekretaris PCM Jebres)| 2 November 2026 |
 
 ## Fitur Website
 
