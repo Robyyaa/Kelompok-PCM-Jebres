@@ -25,7 +25,7 @@ PCM Jebres merupakan salah satu Pimpinan Cabang Muhammadiyah di Kota Surakarta. 
 | Website PDM Kota Surakarta | [muhammadiyahsolo.com](https://muhammadiyahsolo.com/) | 27 Oktober 2026 |
 | Website PWM Jawa Tengah | [pwmjateng.com](https://pwmjateng.com/) | 27 Oktober 2026 |
 | Website PP Muhammadiyah | [muhammadiyah.or.id](https://muhammadiyah.or.id/) | 27 Oktober 2026 |
-| Logo Muhammadiyah | [Wikimedia Commons - Muhammadiyah.svg](https://commons.wikimedia.org/wiki/File:Muhammadiyah.svg), CC BY-SA 4.0 | 27 Oktober 2026 |
+| Logo Muhammadiyah | [Wikimedia Commons - Muhammadiyah.svg](https://commons.wikimedia.org/wiki/File:Muhammadiyah.svg)| 27 Oktober 2026 |
 |Profil dan Alamat PCM Jebres|Google Form Pendataan PCM Jebres, diisi oleh Bapak Drs. Joko Hariyanto (Sekretaris PCM Jebres)|2 November 2026|
 |Sejarah PCM Jebres|Google Form Pendataan PCM Jebres, diisi oleh Bapak Drs. Joko Hariyanto (Sekretaris PCM Jebres)|2 November 2026|
 |Visi dan misi PCM Jebres|Google Form Pendataan PCM Jebres, diisi oleh Bapak Drs. Joko Hariyanto (Sekretaris PCM Jebres)|2 November 2026|
