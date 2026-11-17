@@ -20,8 +20,12 @@
       <span class="contact-card-label">Alamat</span>
       <p>{% if profil and profil.alamat_sekretariat %}{{ profil.alamat_sekretariat|linebreaksbr }}{% else %}Informasi alamat sekretariat belum tersedia.{% endif %}</p>
     </div>
+    <div class="contact-card">
+      <span class="contact-card-label">Narahubung</span>
+      <p><strong>Joko Hariyanto</strong><br>Sekretaris PCM Jebres</p>
+      <p><a href="https://wa.me/6281933747510" target="_blank" rel="noopener noreferrer">WhatsApp: +62 819-3374-7510</a></p>
+    </div>
     {% if profil and profil.telepon %}<div class="contact-card"><span class="contact-card-label">Telepon</span><p><a href="tel:{{ profil.telepon }}">{{ profil.telepon }}</a></p></div>{% else %}<div class="contact-card"><span class="contact-card-label">Telepon</span><p>Informasi telepon resmi belum tersedia.</p></div>{% endif %}
-    {% if profil and profil.email %}<div class="contact-card"><span class="contact-card-label">Email</span><p><a href="mailto:{{ profil.email }}">{{ profil.email }}</a></p></div>{% else %}<div class="contact-card"><span class="contact-card-label">Email</span><p>Informasi email resmi belum tersedia.</p></div>{% endif %}
     <p class="privacy-note">Pesan yang dikirim tersimpan di database dan hanya dapat dilihat oleh pengelola melalui admin.</p>
   </div>
 

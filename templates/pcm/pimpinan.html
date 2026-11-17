@@ -16,7 +16,8 @@
   {% if pimpinan_list %}
     <div class="people-grid">
       {% for orang in pimpinan_list %}
-        <article class="person-card">
+        <article class="person-card{% if orang.foto %} person-card-has-photo{% endif %}">
+          {% if orang.foto %}<img class="person-photo" src="{{ orang.foto.url }}" alt="Foto {{ orang.nama }}" loading="lazy">{% endif %}
           <div class="person-info">
             <p class="person-role">{{ orang.jabatan }}</p>
             <h2>{{ orang.nama }}</h2>

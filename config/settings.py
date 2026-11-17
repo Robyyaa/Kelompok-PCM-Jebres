@@ -56,6 +56,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -63,9 +64,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
-WHITENOISE_ENABLED = not DEBUG or env_bool("WHITENOISE_ENABLED")
-if WHITENOISE_ENABLED:
-    MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
 
 ROOT_URLCONF = "config.urls"
 
@@ -154,13 +152,19 @@ STORAGES = {
 AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME", "").strip()
 AWS_S3_ENDPOINT_URL = os.getenv("AWS_S3_ENDPOINT_URL", "").strip() or None
 AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME", "").strip() or None
+AWS_S3_ADDRESSING_STYLE = os.getenv("AWS_S3_ADDRESSING_STYLE", "").strip() or None
 AWS_S3_CUSTOM_DOMAIN = os.getenv("AWS_S3_CUSTOM_DOMAIN", "").strip() or None
 AWS_QUERYSTRING_AUTH = env_bool("AWS_QUERYSTRING_AUTH", default=False)
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 AWS_S3_SIGNATURE_VERSION = "s3v4"
+if AWS_STORAGE_BUCKET_NAME and AWS_S3_REGION_NAME and not AWS_S3_ENDPOINT_URL:
+    # Use the bucket's regional endpoint instead of S3's legacy global endpoint.
+    AWS_S3_ENDPOINT_URL = f"https://s3.{AWS_S3_REGION_NAME}.amazonaws.com"
 if AWS_S3_ENDPOINT_URL:
-    AWS_S3_ADDRESSING_STYLE = "path"
+    # Avoid the legacy global endpoint unless an addressing style was explicitly configured.
+    if not AWS_S3_ADDRESSING_STYLE:
+        AWS_S3_ADDRESSING_STYLE = "path"
 
 if AWS_STORAGE_BUCKET_NAME:
     STORAGES["default"] = {"BACKEND": "storages.backends.s3.S3Storage"}
