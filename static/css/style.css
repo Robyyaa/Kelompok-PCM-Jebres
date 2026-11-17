@@ -324,16 +324,13 @@ a { color: inherit; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; clip-path: inset(50%); }
 
 .people-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
-.person-card { position: relative; overflow: hidden; border: 1px solid var(--line); background: #fff; }
-.person-portrait { height: 224px; overflow: hidden; background: var(--green-50); }
-.person-portrait > img { width: 100%; height: 100%; object-fit: cover; }
-.portrait-empty { display: grid; width: 100%; height: 100%; place-items: center; color: #789184; background: radial-gradient(circle at 50% 40%, #fff 0 24%, #eaf2eb 25% 100%); }
-.portrait-empty span { display: grid; width: 93px; height: 93px; place-content: center; border: 1px solid #bfd1c3; border-radius: 50%; color: #789184; font-size: 12px; line-height: 1.5; text-align: center; }
-.person-info { padding: 19px 19px 24px; }
-.person-role { min-height: 18px; margin: 0 0 8px; color: var(--green-700); font-size: 10px; font-weight: 700; letter-spacing: .1em; line-height: 1.5; text-transform: uppercase; }
-.person-info h2 { margin: 0; color: var(--green-950); font-family: var(--display); font-size: 15px; font-weight: 800; letter-spacing: -.025em; line-height: 1.5; }
-.person-period { margin: 8px 0 0; color: #869188; font-size: 11px; }
-.person-index { position: absolute; top: 12px; left: 12px; display: grid; width: 31px; height: 31px; place-items: center; color: var(--green-950); background: rgba(255, 254, 250, .92); font-family: var(--display); font-size: 10px; font-weight: 800; }
+.person-card { position: relative; min-height: 170px; overflow: hidden; border: 1px solid var(--line); border-top: 3px solid var(--green-700); background: #fff; transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease; }
+.person-card:hover { border-color: #c5d6c9; border-top-color: var(--gold); box-shadow: 0 12px 28px rgba(6, 59, 42, .08); transform: translateY(-2px); }
+.person-info { display: flex; min-height: 167px; flex-direction: column; align-items: flex-start; padding: 23px 21px 21px; }
+.person-role { margin: 0 0 10px; padding-right: 34px; color: var(--green-700); font-size: 10px; font-weight: 800; letter-spacing: .09em; line-height: 1.55; text-transform: uppercase; }
+.person-info h2 { margin: 0; color: var(--green-950); font-family: var(--display); font-size: 16px; font-weight: 800; letter-spacing: -.025em; line-height: 1.45; overflow-wrap: anywhere; }
+.person-period { margin: auto 0 0; padding-top: 12px; color: #869188; font-size: 11px; }
+.person-index { position: absolute; top: 14px; right: 14px; display: grid; width: 29px; height: 29px; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--green-700); background: var(--green-50); font-family: var(--display); font-size: 9px; font-weight: 800; }
 
 .table-scroll { overflow-x: auto; border: 1px solid var(--line); }
 .data-table { width: 100%; border-collapse: collapse; text-align: left; }
@@ -460,11 +457,12 @@ a { color: inherit; }
   .search-form { width: 100%; }
   .listing-section { padding-block: 34px 66px; }
   .people-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
-  .person-portrait { height: clamp(125px, 46vw, 190px); }
-  .person-info { padding: 14px 12px 17px; }
-  .person-role { min-height: 0; font-size: 9px; }
+  .person-card { min-height: 155px; }
+  .person-info { min-height: 152px; padding: 19px 13px 16px; }
+  .person-role { padding-right: 24px; font-size: 9px; }
   .person-info h2 { font-size: 13px; }
   .person-period { font-size: 10px; }
+  .person-index { top: 10px; right: 10px; width: 24px; height: 24px; font-size: 8px; }
   .sector-group + .sector-group { margin-top: 36px; }
   .sector-heading h2 { font-size: 20px; }
   .enterprise-grid { grid-template-columns: 1fr; gap: 13px; }

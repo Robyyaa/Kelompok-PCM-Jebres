@@ -17,13 +17,6 @@
     <div class="people-grid">
       {% for orang in pimpinan_list %}
         <article class="person-card">
-          <div class="person-portrait">
-            {% if orang.foto %}
-              <img src="{{ orang.foto.url }}" alt="Foto {{ orang.nama }}">
-            {% else %}
-              <div class="portrait-empty"><span>Foto<br>belum tersedia</span></div>
-            {% endif %}
-          </div>
           <div class="person-info">
             <p class="person-role">{{ orang.jabatan }}</p>
             <h2>{{ orang.nama }}</h2>
