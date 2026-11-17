@@ -202,7 +202,6 @@ Paling lambat **pekan ke-8, 17 November 2026**, melalui Google Classroom:
    - `docker compose up --build` dari folder bersih;
    - environment variable di dashboard platform (nilai rahasia **disamarkan**).
 4. **Slide presentasi** (PDF).
-
 ## Presentasi (pekan ke-8)
 
 Setiap kelompok mempresentasikan hasilnya di kelas pada **pekan ke-8**, **5 menit presentasi + 5 menit tanya jawab**:
