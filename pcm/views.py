@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.core.paginator import Paginator
-from django.db.models import Q
+from django.db.models import F, Q
 from django.http import FileResponse, Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
@@ -28,7 +28,9 @@ def home(request):
         ),
         "jumlah_ranting": Ranting.objects.count(),
         "jumlah_amal_usaha": AmalUsaha.objects.count(),
-        "berita_terbaru": Berita.objects.sudah_terbit().order_by("-tanggal_terbit")[:3],
+        "berita_terbaru": Berita.objects.sudah_terbit().order_by(
+            F("tanggal_terbit").desc(nulls_last=True), "-pk"
+        )[:3],
         "agenda_mendatang": Agenda.objects.filter(
             waktu_mulai__gte=timezone.now()
         ).order_by("waktu_mulai")[:3],
@@ -82,7 +84,9 @@ def amal_usaha(request):
 
 
 def berita_list(request):
-    queryset = Berita.objects.sudah_terbit().order_by("-tanggal_terbit")
+    queryset = Berita.objects.sudah_terbit().order_by(
+        F("tanggal_terbit").desc(nulls_last=True), "-pk"
+    )
     pencarian = request.GET.get("q", "").strip()
     if pencarian:
         queryset = queryset.filter(
@@ -109,7 +113,7 @@ def berita_detail(request, slug):
     berita_lain = (
         Berita.objects.sudah_terbit()
         .exclude(pk=berita.pk)
-        .order_by("-tanggal_terbit")[:3]
+        .order_by(F("tanggal_terbit").desc(nulls_last=True), "-pk")[:3]
     )
     return render(
         request,

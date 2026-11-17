@@ -1,0 +1,55 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+{% block title %}{% translate 'Log in' %} | {{ site_title }}{% endblock %}
+{% block bodyclass %}login{% endblock %}
+{% block header %}{% endblock %}
+{% block nav-breadcrumbs %}{% endblock %}
+{% block nav-sidebar %}{% endblock %}
+{% block content_title %}{% endblock %}
+{% block content %}
+<div class="pcm-login-shell">
+  <section class="pcm-login-intro" aria-labelledby="login-brand-title">
+    <a class="pcm-login-brand" href="/">
+      <img src="{% static 'img/Muhammadiyah.svg' %}" alt="" width="46" height="46">
+      <span><strong>Admin PCM Jebres</strong><small>Panel pengelolaan website</small></span>
+    </a>
+    <div class="pcm-login-message">
+      <span class="pcm-login-kicker">Pimpinan Cabang Muhammadiyah Jebres</span>
+      <h1 id="login-brand-title">Mengelola informasi, melayani umat.</h1>
+      <p>Sistem Pengelolaan Konten Pimpinan Cabang Muhammadiyah Jebres.</p>
+    </div>
+    <span class="pcm-login-footnote">PCM Jebres <span aria-hidden="true">·</span> Surakarta</span>
+  </section>
+  <section class="pcm-login-panel" aria-labelledby="login-title">
+    <div class="pcm-login-card">
+      <div class="pcm-login-card-heading">
+        <span class="pcm-login-icon" aria-hidden="true">↗</span>
+        <p class="pcm-eyebrow">Ruang pengelola</p>
+        <h2 id="login-title">Selamat datang</h2>
+        <p>Masuk dengan akun admin untuk melanjutkan.</p>
+      </div>
+      {% if form.errors and not form.non_field_errors %}<div class="pcm-login-alert" role="alert">Periksa kembali username atau password Anda.</div>{% endif %}
+      {% if form.non_field_errors %}<div class="pcm-login-alert" role="alert">{% for error in form.non_field_errors %}{{ error }}{% endfor %}</div>{% endif %}
+      {% if user.is_authenticated and not user.is_staff %}<div class="pcm-login-alert" role="alert">Akun {{ username }} tidak memiliki izin untuk membuka halaman ini. Silakan masuk dengan akun admin lain.</div>{% endif %}
+      <form action="{{ app_path }}" method="post" id="login-form" class="pcm-login-form" novalidate>
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        <div class="pcm-login-field{% if form.username.errors %} has-error{% endif %}">
+          <label for="id_username">Username</label>
+          {{ form.username }}
+          {% for error in form.username.errors %}<small class="pcm-field-error">{{ error }}</small>{% endfor %}
+        </div>
+        <div class="pcm-login-field{% if form.password.errors %} has-error{% endif %}">
+          <label for="id_password">Password</label>
+          <div class="pcm-password-wrap">{{ form.password }}<button type="button" class="pcm-password-toggle" aria-label="Tampilkan password" aria-pressed="false">Tampilkan</button></div>
+          {% for error in form.password.errors %}<small class="pcm-field-error">{{ error }}</small>{% endfor %}
+        </div>
+        {% url 'admin_password_reset' as password_reset_url %}{% if password_reset_url %}<a class="pcm-forgot-link" href="{{ password_reset_url }}">Lupa kredensial?</a>{% endif %}
+        <button type="submit" class="pcm-login-submit"><span class="pcm-button-label">Masuk ke dashboard</span><span class="pcm-button-spinner" aria-hidden="true"></span></button>
+      </form>
+      <a class="pcm-back-home" href="/">← Kembali ke website PCM Jebres</a>
+    </div>
+  </section>
+</div>
+{% endblock %}
+{% block footer %}{% endblock %}

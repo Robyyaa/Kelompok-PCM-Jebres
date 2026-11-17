@@ -7,7 +7,7 @@
     <div class="news-image-placeholder" aria-hidden="true"><span>PCM<br>JEBRES</span></div>
   {% endif %}
   <div class="news-card-body">
-    <time class="card-date" datetime="{{ berita.tanggal_terbit|date:'c' }}">{{ berita.tanggal_terbit|date:"d/m/Y" }}</time>
+    {% if berita.tanggal_terbit %}<time class="card-date" datetime="{{ berita.tanggal_terbit|date:'c' }}">{{ berita.tanggal_terbit|date:"d/m/Y" }}</time>{% else %}<span class="card-date">Tanggal belum ditentukan</span>{% endif %}
     <h3><a href="{% url 'pcm:berita_detail' berita.slug %}">{{ berita.judul }}</a></h3>
     {% if berita.ringkasan %}<p>{{ berita.ringkasan|truncatewords:24 }}</p>{% endif %}
     <a class="card-read-more" href="{% url 'pcm:berita_detail' berita.slug %}">Baca berita <span aria-hidden="true">↗</span></a>

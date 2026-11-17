@@ -1,0 +1,32 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+{% block nav-breadcrumbs %}{% endblock %}
+{% block content_title %}{% endblock %}
+{% block content %}
+<div class="pcm-dashboard">
+  <header class="pcm-dashboard-heading">
+    <div><p class="pcm-eyebrow">Ringkasan pengelolaan</p><h1>Selamat datang, {% firstof user.get_short_name user.get_username %}</h1><p>Pantau dan kelola informasi PCM Jebres dari satu tempat.</p></div>
+    <a class="pcm-site-button" href="/" target="_blank" rel="noopener">Buka website <span aria-hidden="true">↗</span></a>
+  </header>
+  <section class="pcm-stat-grid" aria-label="Statistik konten">
+    {% if admin_can_view_berita %}<article class="pcm-stat-card"><span class="pcm-stat-icon">▤</span><span class="pcm-stat-label">Total berita</span><strong>{{ admin_stats.berita_total }}</strong><a href="{% url 'admin:pcm_berita_changelist' %}">Kelola berita <span aria-hidden="true">→</span></a></article>
+    <article class="pcm-stat-card"><span class="pcm-stat-icon">●</span><span class="pcm-stat-label">Berita terbit</span><strong>{{ admin_stats.berita_terbit }}</strong><a href="{% url 'admin:pcm_berita_changelist' %}?status__exact=terbit">Lihat berita terbit <span aria-hidden="true">→</span></a></article>
+    <article class="pcm-stat-card"><span class="pcm-stat-icon">◷</span><span class="pcm-stat-label">Berita draf</span><strong>{{ admin_stats.berita_draf }}</strong><a href="{% url 'admin:pcm_berita_changelist' %}?status__exact=draf">Lihat draf <span aria-hidden="true">→</span></a></article>{% endif %}
+    {% if admin_can_view_agenda %}<article class="pcm-stat-card"><span class="pcm-stat-icon">▦</span><span class="pcm-stat-label">Total agenda</span><strong>{{ admin_stats.agenda_total }}</strong><a href="{% url 'admin:pcm_agenda_changelist' %}">Kelola agenda <span aria-hidden="true">→</span></a></article>{% endif %}
+    {% if admin_can_view_pesan %}<article class="pcm-stat-card"><span class="pcm-stat-icon">✉</span><span class="pcm-stat-label">Pesan masuk</span><strong>{{ admin_stats.pesan_total }}</strong><a href="{% url 'admin:pcm_pesanmasuk_changelist' %}">Lihat pesan <span aria-hidden="true">→</span></a></article>{% endif %}
+  </section>
+  {% if admin_can_add_berita or admin_can_add_agenda %}<section class="pcm-quick-actions" aria-label="Aksi cepat"><div><h2>Aksi cepat</h2><p>Mulai pekerjaan yang sering dilakukan.</p></div><div class="pcm-quick-links">{% if admin_can_add_berita %}<a class="pcm-primary-action" href="{% url 'admin:pcm_berita_add' %}">＋ Tulis berita</a>{% endif %}{% if admin_can_add_agenda %}<a class="pcm-secondary-action" href="{% url 'admin:pcm_agenda_add' %}">＋ Tambah agenda</a>{% endif %}</div></section>{% endif %}
+  <div class="pcm-dashboard-columns">
+    {% if admin_can_view_berita %}<section class="pcm-panel"><div class="pcm-panel-heading"><div><p class="pcm-eyebrow">Pembaruan terakhir</p><h2>Berita terbaru</h2></div><a href="{% url 'admin:pcm_berita_changelist' %}">Semua berita →</a></div>
+      {% if admin_recent_berita %}<ul class="pcm-recent-list">{% for berita in admin_recent_berita %}<li><a href="{% url 'admin:pcm_berita_change' berita.pk %}"><span class="pcm-recent-title">{{ berita.judul }}</span><span class="pcm-recent-meta">{% if berita.tanggal_terbit %}{{ berita.tanggal_terbit|date:'d M Y, H:i' }}{% else %}Belum ditentukan{% endif %} · {{ berita.get_status_display }}</span></a></li>{% endfor %}</ul>{% else %}<p class="pcm-empty-note">Belum ada berita.</p>{% endif %}
+    </section>{% endif %}
+    {% if admin_can_view_agenda %}<section class="pcm-panel"><div class="pcm-panel-heading"><div><p class="pcm-eyebrow">Agenda organisasi</p><h2>Agenda terbaru</h2></div><a href="{% url 'admin:pcm_agenda_changelist' %}">Semua agenda →</a></div>
+      {% if admin_recent_agenda %}<ul class="pcm-recent-list">{% for agenda in admin_recent_agenda %}<li><a href="{% url 'admin:pcm_agenda_change' agenda.pk %}"><span class="pcm-recent-title">{{ agenda.nama_kegiatan }}</span><span class="pcm-recent-meta">{{ agenda.waktu_mulai|date:'d M Y, H:i' }}{% if agenda.tempat %} · {{ agenda.tempat }}{% endif %}</span></a></li>{% endfor %}</ul>{% else %}<p class="pcm-empty-note">Belum ada agenda.</p>{% endif %}
+    </section>{% endif %}
+  </div>
+  <section class="pcm-panel pcm-models-panel"><div class="pcm-panel-heading"><div><p class="pcm-eyebrow">Kelola website</p><h2>Semua modul</h2></div></div>
+    <div class="pcm-module-grid">{% for app in app_list %}{% for model in app.models %}{% if model.admin_url or model.add_url %}<a class="pcm-module-link" href="{% if model.admin_url %}{{ model.admin_url }}{% else %}{{ model.add_url }}{% endif %}"><span class="pcm-module-mark">{{ model.name|first|upper }}</span><span><strong>{{ model.name }}</strong><small>{{ app.name }}</small></span><span class="pcm-module-arrow">→</span></a>{% else %}<div class="pcm-module-link is-disabled"><span class="pcm-module-mark">{{ model.name|first|upper }}</span><span><strong>{{ model.name }}</strong><small>{{ app.name }}</small></span></div>{% endif %}{% endfor %}{% endfor %}</div>
+  </section>
+</div>
+{% endblock %}

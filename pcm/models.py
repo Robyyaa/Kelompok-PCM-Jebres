@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.db.models import Q
 from django.utils import timezone
 from django.utils.text import slugify
 
@@ -100,9 +101,8 @@ class AmalUsaha(models.Model):
 
 class BeritaQuerySet(models.QuerySet):
     def sudah_terbit(self):
-        return self.filter(
-            status=Berita.Status.TERBIT,
-            tanggal_terbit__lte=timezone.now(),
+        return self.filter(status=Berita.Status.TERBIT).filter(
+            Q(tanggal_terbit__isnull=True) | Q(tanggal_terbit__lte=timezone.now())
         )
 
 
@@ -118,7 +118,7 @@ class Berita(models.Model):
     ringkasan = models.TextField(blank=True)
     isi = models.TextField()
     gambar_sampul = models.ImageField(upload_to="berita/", blank=True)
-    tanggal_terbit = models.DateTimeField()
+    tanggal_terbit = models.DateTimeField(null=True, blank=True)
     status = models.CharField(
         max_length=10,
         choices=Status.choices,

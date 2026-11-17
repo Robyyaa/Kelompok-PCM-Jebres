@@ -80,6 +80,7 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 "pcm.context_processors.pcm_global",
+                "pcm.context_processors.pcm_admin_dashboard",
             ],
         },
     },

@@ -171,5 +171,5 @@ class Command(BaseCommand):
             self.record_result(counts, TautanTerkait, created)
 
     def skip_berita_tanpa_data_lengkap(self, counts):
-        # Isi dan tanggal_terbit wajib, tetapi tidak diberikan; jangan membuat berita.
+        # Belum ada konten berita untuk di-seed; tanggal kosong kini diperbolehkan.
         counts[(Berita.__name__, "skipped")] += 5

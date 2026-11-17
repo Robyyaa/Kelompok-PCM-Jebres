@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.db.models import F
+from django.utils import formats
 
 from .models import (
     Agenda,
@@ -52,12 +54,16 @@ class AmalUsahaAdmin(admin.ModelAdmin):
 
 @admin.register(Berita)
 class BeritaAdmin(admin.ModelAdmin):
-    list_display = ("judul", "status", "tanggal_terbit", "updated_at")
+    list_display = ("judul", "status", "tanggal_terbit_label", "updated_at")
     search_fields = ("judul", "ringkasan", "isi", "slug")
     list_filter = ("status", "tanggal_terbit")
     date_hierarchy = "tanggal_terbit"
     prepopulated_fields = {"slug": ("judul",)}
-    ordering = ("-tanggal_terbit",)
+    ordering = (F("tanggal_terbit").desc(nulls_last=True), "-pk")
+
+    @admin.display(description="Tanggal terbit", ordering="tanggal_terbit")
+    def tanggal_terbit_label(self, obj):
+        return formats.date_format(obj.tanggal_terbit, "DATETIME_FORMAT") if obj.tanggal_terbit else "Belum ditentukan"
 
     def save_model(self, request, obj, form, change):
         # Slug hasil prepopulasi admin tetap dibuat unik saat judul duplikat.

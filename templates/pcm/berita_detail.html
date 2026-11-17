@@ -9,7 +9,7 @@
       <a class="back-link" href="{% url 'pcm:berita_list' %}">← Semua berita</a>
       <p class="section-kicker">Berita PCM Jebres</p>
       <h1>{{ berita.judul }}</h1>
-      <time datetime="{{ berita.tanggal_terbit|date:'c' }}">{{ berita.tanggal_terbit|date:"d/m/Y · H:i" }}</time>
+      {% if berita.tanggal_terbit %}<time datetime="{{ berita.tanggal_terbit|date:'c' }}">{{ berita.tanggal_terbit|date:"d/m/Y · H:i" }}</time>{% else %}<p>Tanggal belum ditentukan</p>{% endif %}
     </div>
   </header>
   {% if berita.gambar_sampul %}
@@ -26,7 +26,7 @@
         <h2 id="related-title">Berita lainnya</h2>
         <ul>
           {% for lainnya in berita_lain %}
-            <li><time datetime="{{ lainnya.tanggal_terbit|date:'c' }}">{{ lainnya.tanggal_terbit|date:"d/m/Y" }}</time><a href="{% url 'pcm:berita_detail' lainnya.slug %}">{{ lainnya.judul }}</a></li>
+            <li>{% if lainnya.tanggal_terbit %}<time datetime="{{ lainnya.tanggal_terbit|date:'c' }}">{{ lainnya.tanggal_terbit|date:"d/m/Y" }}</time>{% else %}<span>Tanggal belum ditentukan</span>{% endif %}<a href="{% url 'pcm:berita_detail' lainnya.slug %}">{{ lainnya.judul }}</a></li>
           {% endfor %}
         </ul>
       </aside>

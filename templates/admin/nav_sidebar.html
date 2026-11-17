@@ -1,0 +1,27 @@
+{% load i18n pcm_admin %}
+<button class="sticky toggle-nav-sidebar" id="toggle-nav-sidebar" aria-label="{% translate 'Toggle navigation' %}"></button>
+<nav class="sticky" id="nav-sidebar" aria-label="{% translate 'Sidebar' %}">
+  <div class="pcm-sidebar-brand">
+    <span class="pcm-brand-mark" aria-hidden="true">PCM</span>
+    <span><strong>PCM Jebres</strong><small>Content management</small></span>
+  </div>
+  <a class="pcm-dashboard-link{% if request.resolver_match.url_name == 'index' and request.resolver_match.namespace == 'admin' %} is-active{% endif %}" href="{% url 'admin:index' %}"><span aria-hidden="true">⌂</span> Dashboard</a>
+  <label class="pcm-nav-search" for="nav-filter"><span aria-hidden="true">⌕</span><input type="search" id="nav-filter" placeholder="Cari menu…" aria-label="{% translate 'Filter navigation items' %}"></label>
+  {% pcm_admin_nav_groups available_apps as nav_groups %}
+  {% for group in nav_groups %}
+    <section class="pcm-nav-group" aria-label="{{ group.title }}">
+      <h2>{{ group.title }}</h2>
+      <ul>
+        {% for model in group.items %}
+          <li{% if model.admin_url and model.admin_url in request.path %} class="is-current"{% endif %}>
+            {% if model.nav_url %}<a href="{{ model.nav_url }}"><span class="pcm-nav-dot" aria-hidden="true"></span>{{ model.name }}</a>{% else %}<span class="pcm-nav-disabled"><span class="pcm-nav-dot" aria-hidden="true"></span>{{ model.name }}</span>{% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+  {% endfor %}
+  <div class="pcm-sidebar-footer">
+    <a href="/" target="_blank" rel="noopener">Lihat website <span aria-hidden="true">↗</span></a>
+    {% if user.is_authenticated %}<form method="post" action="{% url 'admin:logout' %}">{% csrf_token %}<button type="submit">Keluar dari admin</button></form>{% endif %}
+  </div>
+</nav>
