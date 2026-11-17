@@ -157,7 +157,6 @@ Gunakan akun administrator yang telah dibuat melalui perintah `createsuperuser`.
 Alamat: Komplek Islamic Center Muhammadiyah Jebres, Jl. Tentara Pelajar No. 1, Kandangsapi, Jebres, Surakarta.
 
 ## Referensi Tautan
-
 - [Muhammadiyah Kota Surakarta](https://muhammadiyahsolo.com/)
 - [Pimpinan Wilayah Muhammadiyah Jawa Tengah](https://muhammadiyahjateng.or.id/)
 - [Pimpinan Pusat Muhammadiyah](https://muhammadiyah.or.id/)
